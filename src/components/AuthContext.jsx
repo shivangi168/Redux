@@ -5,7 +5,7 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // ✅ Make sure it's inside Router
+  const navigate = useNavigate();
 
   const login = (username) => {
     if (!username) {
@@ -13,12 +13,12 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     setUser({ name: username });
-    navigate("/dashboard"); // ✅ Redirect after login
+    navigate("/dashboard"); 
   };
 
   const logout = () => {
     setUser(null);
-    navigate("/login"); // ✅ Always redirect to login on logout
+    navigate("/login"); 
   };
 
   return (
