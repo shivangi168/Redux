@@ -1,48 +1,54 @@
-import { BrowserRouter as Router, Routes ,Route } from 'react-router'
-import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, AuthContext } from "./components/AuthContext";
+import { useContext } from "react";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import UserProfile from "./components/userProfile";
+import NoPageFound from "./components/NoPageFound";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import './App.css'
-// import FormPage from './pages/FormPage'
-import Header from './components/Header'
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import UserProfile from './components/userProfile'
-import NoPageFound from './components/NoPageFound'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const user = "Shovangoi";
+  return (
+    <Router> 
+      <AuthProvider>
+        <AuthWrapper />
+      </AuthProvider>
+    </Router>
+  );
+}
+
+const AuthWrapper = () => {
+  const { user } = useContext(AuthContext);
 
   return (
     <>
-     <Router>
-      <Header/>
+      {user && <Header />}
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/About" element={<About/>}></Route>
-        <Route path="/Contact" element={<Contact/>}></Route>
-        <Route path='/user/:id' element={<UserProfile/>}></Route>
-        <Route path="/user" element={<UserProfile />} />
-        <Route path="*" element={<NoPageFound/>}></Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={user ? <MainRoutes /> : <Navigate to="/login" />} />
       </Routes>
-     </Router>
-     {/* return <Parent user={user} />; */}
-     
-  
-     {/* <FormPage/> */}
     </>
-  )
-}
+  );
+};
 
-export default App
-// function Parent({ user }) {
-//   return <Child user={user} />;
-// }
+const MainRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/user/:id" element={<UserProfile />} />
+      <Route path="/user" element={<UserProfile />} />
+      <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+      <Route path="*" element={<NoPageFound />} />
+    </Routes>
+  );
+};
 
-// function Child({ user }) {
-//   return <GrandChild user={user} />;
-// }
-
-// function GrandChild({ user }) {
-//   return <h2>Welcome, {user}!</h2>;
-// }
+export default App;
