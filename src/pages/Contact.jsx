@@ -1,7 +1,13 @@
-import HomeContainerPage  from "../containers/HomeContainer";
+// import HomeContainerPage  from "../containers/HomeContainer";
+import Parent from "../components/Parent";
 function Contact() {
     return (
-      <HomeContainerPage/>
+      <div>
+          <Parent/>
+          {/* <HomeContainerPage/> */}
+
+      </div>
+    
     )
   }
   
