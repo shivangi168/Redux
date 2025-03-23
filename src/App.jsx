@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./components/AuthContext";
+import { QueryClient , QueryClientProvider } from '@tanstack/react-query';
 import { useContext } from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -11,13 +12,18 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import './App.css'
+import ReactQuery from "./pages/ReactQuery";
+
+const queryClient = new QueryClient();
 
 
 function App() {
   return (
     <Router> 
       <AuthProvider>
+        <QueryClientProvider client={queryClient}>
         <AuthWrapper />
+        </QueryClientProvider>
       </AuthProvider>
     </Router>
   );
@@ -32,6 +38,7 @@ const AuthWrapper = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={user ? <MainRoutes /> : <Navigate to="/login" />} />
+      
       </Routes>
     </>
   );
@@ -45,8 +52,11 @@ const MainRoutes = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/user/:id" element={<UserProfile />} />
       <Route path="/user" element={<UserProfile />} />
+      <Route path ="/ReactQuery" element={<ReactQuery/>}></Route>
       <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
       <Route path="*" element={<NoPageFound />} />
+      {/* <Route path="/contact" element={<HomeContainerPage />} /> */}
+
     </Routes>
   );
 };

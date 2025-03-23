@@ -1,5 +1,8 @@
+import HomeContainerPage  from "../containers/HomeContainer";
 function Contact() {
-    return <h2>Contact Page</h2>;
+    return (
+      <HomeContainerPage/>
+    )
   }
   
   export default Contact;
