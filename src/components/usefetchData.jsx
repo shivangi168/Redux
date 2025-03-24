@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const useFetchData = (url) => {
+const UseFetchData = (url) => {
   const { data, error, isLoading } = useQuery(
     ["data", url], async () => {
     const res = await fetch(url);
@@ -13,4 +13,4 @@ const useFetchData = (url) => {
   return { data, error, isLoading };
 };
 
-export default useFetchData;
+export default UseFetchData;

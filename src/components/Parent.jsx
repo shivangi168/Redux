@@ -1,6 +1,7 @@
 import React , { useState , useEffect, useCallback , useRef} from 'react';
 
 import ChildCompo from '../components/ChildCompo'
+import UserListing from './UserListing';
 function Parent(){
     const [user, setUser] = useState(null);
     const [message , setMessage] = useState("No message yet");
@@ -70,6 +71,7 @@ function Parent(){
              sendMsg = {updateMessage}
              /> 
              : <p>Loading...</p>}
+             <UserListing/>
         </div>
     );
 };
