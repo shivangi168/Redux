@@ -11,7 +11,7 @@ const PaginatedUsers = () => {
   return (
     <div>
       <ul>
-        {data.map((user) => (
+        { data && data.length>0 && data.map((user) => (
           <li key={user.id}>{user.name} - {user.email}</li>
         ))}
       </ul>
