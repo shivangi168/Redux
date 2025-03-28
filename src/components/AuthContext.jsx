@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
       });
-      if (response.data.success) {
+      if (response.data.message === "Login successful") {
         setUser(username);
         localStorage.setItem("user", username);
         alert("Login successful!");
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-
+  
   const logout = async () => {
     await axios.post("http://localhost:5000/api/logout");
     setUser(null);
