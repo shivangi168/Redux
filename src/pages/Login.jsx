@@ -14,11 +14,11 @@ function Login() {
 
   const handleAuth = async () => {
     const payload = {
-      username,
       password,
-      ...(isLogin ? {} : { email })
+      ...(username && { username }),
+      ...(email && { email })
     };
-
+  
     const url = isLogin ? "http://localhost:5000/api/login" : "http://localhost:5000/api/signup";
     try {
       const response = await fetch(url, {
@@ -29,11 +29,13 @@ function Login() {
         body: JSON.stringify(payload)
       });
       const data = await response.json();
-
+  
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        alert(isLogin ? "Login successful!" : "Signup successful!");
-        navigate("/dashboard");
+        console.log(isLogin ? "Login successful!" : "Signup successful!");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 100);
       } else {
         alert(data.message || "Something went wrong!");
       }
@@ -41,6 +43,7 @@ function Login() {
       alert("Network error! Please try again later.");
     }
   };
+  
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
