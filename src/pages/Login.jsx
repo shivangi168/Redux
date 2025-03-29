@@ -19,7 +19,7 @@ function Login() {
       ...(isLogin ? {} : { email })
     };
 
-    const url = isLogin ? "http://localhost:5000/ap/login" : "http://localhost:5000/ap/signup";
+    const url = isLogin ? "http://localhost:5000/api/login" : "http://localhost:5000/api/signup";
     try {
       const response = await fetch(url, {
         method: "POST",
