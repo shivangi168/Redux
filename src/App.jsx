@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./components/AuthContext";
-import { QueryClient , QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useContext } from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -11,18 +11,17 @@ import NoPageFound from "./components/NoPageFound";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import './App.css'
+import "./App.css";
 import ReactQuery from "./pages/ReactQuery";
 
 const queryClient = new QueryClient();
 
-
 function App() {
   return (
-    <Router> 
+    <Router>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-        <AuthWrapper />
+          <AuthWrapper />
         </QueryClientProvider>
       </AuthProvider>
     </Router>
@@ -37,27 +36,11 @@ const AuthWrapper = () => {
       {user && <Header />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={user ? <MainRoutes /> : <Navigate to="/login" />} />
-      
+        <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="*" element={<NoPageFound />} />
       </Routes>
     </>
-  );
-};
-
-const MainRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/user/:id" element={<UserProfile />} />
-      <Route path="/user" element={<UserProfile />} />
-      <Route path ="/ReactQuery" element={<ReactQuery/>}></Route>
-      <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-      <Route path="*" element={<NoPageFound />} />
-      {/* <Route path="/contact" element={<HomeContainerPage />} /> */}
-
-    </Routes>
   );
 };
 

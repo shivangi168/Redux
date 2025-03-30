@@ -1,4 +1,3 @@
-
 import React, { createContext, useState } from "react";
 import axios from "axios";
 
@@ -16,6 +15,7 @@ export const AuthProvider = ({ children }) => {
       if (response.data.message === "Login successful") {
         setUser(username);
         localStorage.setItem("user", username);
+        localStorage.setItem("token", response.data.token); // Save token
         alert("Login successful!");
         return true;
       }
@@ -24,13 +24,24 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-  
+
+
   const logout = async () => {
-    await axios.post("http://localhost:5000/api/logout");
-    setUser(null);
-    localStorage.removeItem("user");
-    alert("Logged out!");
-  };
+    try {
+        const response = await axios.post("http://localhost:5000/api/logout");
+        if (response.status === 200) {
+            localStorage.removeItem("token");
+            alert("Logged out!");
+            window.location.href = "/login";
+        } else {
+            alert("Logout failed!");
+        }
+    } catch (error) {
+        console.error("Error during logout:", error.message);
+        alert("Logout failed! Please try again.");
+    }
+};
+
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
@@ -38,34 +49,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-// import { useState, createContext } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// export const AuthContext = createContext(null);
-
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-//   const navigate = useNavigate();
-
-//   const login = (username) => {
-//     if (!username) {
-//       console.warn("Username can't be empty!");
-//       return;
-//     }
-//     setUser({ name: username });
-//     navigate("/dashboard"); 
-//   };
-
-//   const logout = () => {
-//     setUser(null);
-//     navigate("/login"); 
-//   };
-
-//   return (
-//     <AuthContext.Provider value={{ user, login, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
