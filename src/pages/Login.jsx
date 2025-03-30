@@ -101,17 +101,26 @@ function Login() {
           </div>
         </div>
         <div
-          className="d-none d-md-flex align-items-center justify-content-center bg-primary text-white"
-          style={{ flex: 1, borderRadius: "20px", padding: "20px" }}
-        >
-          <div className="text-center">
-            <h1>Make a Dream.</h1>
-            <p>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
-            </p>
-            <p>- Waleed Lozano, Product Designer</p>
-          </div>
-        </div>
+  className="d-none d-md-flex align-items-center justify-content-center text-white"
+  style={{
+    flex: 1,
+    borderRadius: "20px",
+    padding: "20px",
+    backgroundImage: "url(/home.jpg)",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    color: "white"
+  }}
+>
+  <div className="text-center">
+    <h1>Make a Dream.</h1>
+    {/* <p>
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
+    </p> */}
+    {/* <p>- Waleed Lozano, Product Designer</p> */}
+  </div>
+</div>
+
       </div>
     </div>
   );
