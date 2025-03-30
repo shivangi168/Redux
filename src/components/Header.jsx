@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../components/AuthContext";
-import { FaUserCircle } from "react-icons/fa";
+import { AuthContext } from "./AuthContext";
 import "./Header.css";
 
 function Header() {
@@ -9,21 +8,23 @@ function Header() {
 
   return (
     <header className="header">
-      <nav className="navbar">
+      <nav>
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/dashboard">Container</Link></li>
           <li><Link to="/ReactQuery">React Query</Link></li>
+
+          {user ? (
+            <>
+              <li><span>👤 {user}</span></li>
+              <li><button onClick={logout}>Logout</button></li>
+            </>
+          ) : (
+            <li><Link to="/login">Login</Link></li>
+          )}
         </ul>
-        {user && (
-          <div className="profile-section">
-            <FaUserCircle size={30} />
-            <span className="username">{user}</span>
-            <button className="logout-btn" onClick={logout}>Logout</button>
-          </div>
-        )}
       </nav>
     </header>
   );

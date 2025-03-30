@@ -31,8 +31,10 @@ export const AuthProvider = ({ children }) => {
         const response = await axios.post("http://localhost:5000/api/logout");
         if (response.status === 200) {
             localStorage.removeItem("token");
+            localStorage.removeItem("user"); // Remove user as well
+            setUser(null); 
             alert("Logged out!");
-            window.location.href = "/login";
+            // window.location.href = "/login";
         } else {
             alert("Logout failed!");
         }

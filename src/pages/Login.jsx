@@ -31,7 +31,8 @@ function Login() {
       const data = await response.json();
   
       if (response.ok) {
-        localStorage.setItem("token", data.token);
+        // Call the login function from AuthContext for state update
+        await login(username, password);
         console.log(isLogin ? "Login successful!" : "Signup successful!");
         setTimeout(() => {
           navigate("/dashboard");
