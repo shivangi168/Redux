@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import "./App.css";
 import ReactQuery from "./pages/ReactQuery";
+import ListingList from './pages/ListingList';
+
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,7 @@ const AuthWrapper = () => {
       {user && <Header />}
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/listing" element={<ListingList />} />
         <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="*" element={<NoPageFound />} />
