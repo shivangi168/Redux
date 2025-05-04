@@ -14,6 +14,8 @@ import Dashboard from "./pages/Dashboard";
 import "./App.css";
 import ReactQuery from "./pages/ReactQuery";
 import ListingList from './pages/ListingList';
+// import CityStateManager from './pages/CityStateManager';
+
 
 
 const queryClient = new QueryClient();
@@ -39,6 +41,7 @@ const AuthWrapper = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/listing" element={<ListingList />} />
+        {/* <Route path="/cityStateManger" element={<CityStateManager />} /> */}
         <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="*" element={<NoPageFound />} />

@@ -1,6 +1,7 @@
 import React ,{useContext } from "react";
 import { AuthContext } from "../components/AuthContext";
 import { Link } from "react-router-dom";
+import CityStateManager from '../components/cityStateManager';
 
 
 
@@ -9,6 +10,7 @@ const  Dashboard = () => {
 
   return (
     <div className="container mt-5">
+      <CityStateManager/>
       <h2>Welcome, {user}!</h2>
       <p>Your profile details:</p>
       <ul className="list-group">

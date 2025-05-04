@@ -3,6 +3,8 @@ import { AuthContext } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import CityStateManager from '../components/cityStateManager';
+
 
 function Login() {
   const { login } = useContext(AuthContext);
@@ -52,6 +54,7 @@ function Login() {
 
   return (
     <div>
+      <CityStateManager/>
       <div className="card shadow-lg p-4 d-flex flex-row" style={{ borderRadius: "20px", maxWidth: "800px" }}>
         <div className="p-4" style={{ flex: 1 }}>
           <h2 className="mb-4">{isLogin ? "Welcome Back" : "Create an Account"}</h2>
