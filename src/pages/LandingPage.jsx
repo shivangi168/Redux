@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ExploreEvents from '../components/ExploreEvents'
 
 export default function LandingPage() {
   return (
@@ -69,6 +70,11 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+      <div>
+        <ExploreEvents/>
+      </div>
+
+      
     </div>
   );
 }
