@@ -17,7 +17,7 @@ export default function LandingPage() {
                 <a className="nav-link text-dark" href="#">Home</a>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link text-dark" href="#">About us</a>
+                <a  href="/about" className="nav-link text-dark" >About us</a>
               </li>
               <li className="nav-item mx-2">
                 <a className="nav-link text-dark" href="#">Course</a>
